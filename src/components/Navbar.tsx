@@ -49,7 +49,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop links */}
-        <nav className="hidden md:flex items-center gap-7">
+        <nav className="hidden md:flex items-center gap-7" aria-label="Main navigation">
           {links.map((link, i) => (
             <a
               key={i}
@@ -66,6 +66,7 @@ export default function Navbar() {
           <button
             onClick={() => setLang(lang === "es" ? "en" : "es")}
             className="text-xs font-semibold px-3 py-1.5 rounded-full border border-black/12 hover:border-black/25 text-[#6E6E73] hover:text-[#1D1D1F] transition-all duration-200 tracking-wide"
+            aria-label={lang === "es" ? "Switch to English" : "Cambiar a Español"}
           >
             {lang === "es" ? "EN" : "ES"}
           </button>
@@ -74,7 +75,8 @@ export default function Navbar() {
           <button
             className="md:hidden flex flex-col justify-center items-center gap-[5px] w-8 h-8"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
             <span
               className={`block h-[1.5px] w-5 bg-[#1D1D1F] origin-center transition-all duration-300 ${

@@ -83,7 +83,7 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <motion.p
-          className="text-xs font-semibold text-[#8E8E93] tracking-[0.2em] uppercase mb-5"
+          className="text-xs font-semibold text-[#6E6E73] tracking-[0.2em] uppercase mb-5"
           {...fadeUp(0.2)}
         >
           {t.greeting}
@@ -111,7 +111,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.p
-          className="text-sm text-[#8E8E93] mb-10 max-w-sm mx-auto leading-relaxed"
+          className="text-sm text-[#6E6E73] mb-10 max-w-sm mx-auto leading-relaxed"
           {...fadeUp(0.7)}
         >
           {t.tagline}

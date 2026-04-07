@@ -59,7 +59,7 @@ export default function Contact() {
   const t = CONTENT[lang];
 
   return (
-    <section id="contact" className="py-32 bg-[#111111] overflow-hidden relative">
+    <section id="contact" className="py-32 bg-[#111111] overflow-hidden relative" aria-label="Contact">
       <div
         className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none opacity-[0.08]"
         style={{ background: "radial-gradient(circle, #A8D5C2, transparent 65%)" }}

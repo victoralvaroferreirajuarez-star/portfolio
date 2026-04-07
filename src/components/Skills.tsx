@@ -59,10 +59,11 @@ export default function Skills() {
             <motion.div
               key={skill.name}
               className="p-6 bg-white rounded-2xl hover:shadow-md transition-shadow duration-300"
-              initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
+              transition={{ duration: 0.55, delay: i * 0.08, ease: [0.6, 0, 0.05, 1] }}
+              whileHover={{ y: -4, boxShadow: "0 8px 30px rgba(0,0,0,0.08)", transition: { duration: 0.25 } }}
             >
               <div className="flex justify-between items-center mb-3">
                 <span className="text-sm font-semibold text-[#1D1D1F]">{skill.name}</span>
