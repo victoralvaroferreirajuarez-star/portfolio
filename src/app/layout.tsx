@@ -25,8 +25,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Alvaro Ferreira" }],
   creator: "Alvaro Ferreira",
   icons: {
-    icon: "/favicon.png",
-    apple: "/logo.png",
+    icon: [
+      { url: "/favicon.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: { url: "/apple-icon.png", sizes: "180x180" },
   },
   metadataBase: new URL("https://avalito.dev"),
   openGraph: {
