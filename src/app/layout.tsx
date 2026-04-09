@@ -26,10 +26,10 @@ export const metadata: Metadata = {
   creator: "Alvaro Ferreira",
   icons: {
     icon: [
-      { url: "/favicon.png", sizes: "48x48", type: "image/png" },
-      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon.png?v=2", sizes: "64x64", type: "image/png" },
+      { url: "/icon-192.png?v=2", sizes: "192x192", type: "image/png" },
     ],
-    apple: { url: "/apple-icon.png", sizes: "180x180" },
+    apple: { url: "/apple-icon.png?v=2", sizes: "180x180" },
   },
   metadataBase: new URL("https://avalito.dev"),
   openGraph: {
