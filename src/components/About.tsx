@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, Code2, Lightbulb, Target } from "lucide-react";
+import { GraduationCap, Code2, Lightbulb, Target, Shield } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -11,7 +11,7 @@ const CONTENT = {
     title: "Construyendo desde cero,\ncon visión de futuro.",
     paragraphs: [
       "Soy Alvaro Ferreira, conocido como avalito. En septiembre empezaré mis estudios en Computer Science, donde convertiré mi pasión por la tecnología en habilidades concretas.",
-      "Me atrae la idea de crear productos digitales que combinen funcionalidad impecable con diseño elegante. Creo en el trabajo constante y en aprender haciendo.",
+      "Me atrae la idea de crear productos digitales que combinen funcionalidad impecable con diseño elegante. También estuve formándome en ciberseguridad y game hacking en memoryhackers, aprendiendo cómo funcionan los sistemas de seguridad de juegos por dentro. Creo en el trabajo constante y en aprender haciendo.",
     ],
     cards: [
       {
@@ -23,6 +23,11 @@ const CONTENT = {
         icon: Code2,
         title: "Autodidacta",
         desc: "Aprendiendo desarrollo web por mi cuenta.",
+      },
+      {
+        icon: Shield,
+        title: "Ciberseguridad",
+        desc: "Game hacking y seguridad en memoryhackers.",
       },
       {
         icon: Lightbulb,
@@ -41,7 +46,7 @@ const CONTENT = {
     title: "Building from scratch,\nwith a vision for the future.",
     paragraphs: [
       "I'm Alvaro Ferreira, also known as avalito. In September I'll start studying Computer Science, where I'll turn my passion for technology into real skills.",
-      "I'm drawn to creating digital products that combine flawless functionality with elegant design. I believe in consistent effort and learning by doing.",
+      "I'm drawn to creating digital products that combine flawless functionality with elegant design. I also trained in cybersecurity and game hacking at memoryhackers, learning how game security systems work from the inside. I believe in consistent effort and learning by doing.",
     ],
     cards: [
       {
@@ -53,6 +58,11 @@ const CONTENT = {
         icon: Code2,
         title: "Self-taught",
         desc: "Learning web development on my own.",
+      },
+      {
+        icon: Shield,
+        title: "Cybersecurity",
+        desc: "Game hacking & security at memoryhackers.",
       },
       {
         icon: Lightbulb,
@@ -121,7 +131,7 @@ export default function About() {
         </div>
 
         {/* Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {t.cards.map((card, i) => (
             <motion.div
               key={i}
