@@ -43,12 +43,9 @@ export default function Navbar() {
         {/* Logo */}
         <a
           href="#hero"
-          className="flex items-center gap-2"
+          className="flex items-center"
         >
-          <img src="/logo.png" alt="avalito" className="h-8 w-auto" />
-          <span className="text-base font-semibold tracking-tight bg-gradient-to-r from-[#6BBF9E] to-[#5BA8D4] bg-clip-text text-transparent">
-            avalito
-          </span>
+          <img src="/logo.png" alt="avalito" className="h-9 w-auto" />
         </a>
 
         {/* Desktop links */}

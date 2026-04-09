@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Alvaro Ferreira" }],
   creator: "Alvaro Ferreira",
   icons: {
-    icon: "/logo.png",
+    icon: "/favicon.png",
     apple: "/logo.png",
   },
   metadataBase: new URL("https://avalito.dev"),
