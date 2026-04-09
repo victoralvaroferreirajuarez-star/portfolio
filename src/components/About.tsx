@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Code2, Lightbulb, Target } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 
 const CONTENT = {
   es: {
@@ -78,10 +79,12 @@ const fadeUp = {
 
 export default function About() {
   const { lang } = useLanguage();
+  const { theme } = useTheme();
   const t = CONTENT[lang];
+  const dark = theme === "dark";
 
   return (
-    <section id="about" className="py-32 bg-white">
+    <section id="about" className={`py-32 transition-colors duration-300 ${dark ? "bg-[#09090b]" : "bg-white"}`}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -95,7 +98,7 @@ export default function About() {
           <p className="text-xs font-semibold text-[#6BBF9E] tracking-[0.18em] uppercase mb-3">
             {t.label}
           </p>
-          <h2 className="text-[clamp(2rem,5vw,3.2rem)] font-bold text-[#1D1D1F] leading-[1.1] tracking-tight whitespace-pre-line">
+          <h2 className={`text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-tight whitespace-pre-line ${dark ? "text-white" : "text-[#1D1D1F]"}`}>
             {t.title}
           </h2>
         </motion.div>
@@ -105,7 +108,7 @@ export default function About() {
           {t.paragraphs.map((p, i) => (
             <motion.p
               key={i}
-              className="text-lg text-[#6E6E73] leading-[1.75] font-light"
+              className={`text-lg leading-[1.75] font-light ${dark ? "text-[#a1a1aa]" : "text-[#6E6E73]"}`}
               initial="hidden"
               whileInView="visible"
               custom={0.1 + i * 0.12}
@@ -122,7 +125,7 @@ export default function About() {
           {t.cards.map((card, i) => (
             <motion.div
               key={i}
-              className="p-6 rounded-2xl bg-[#F5F5F7] group cursor-default"
+              className={`p-6 rounded-2xl group cursor-default ${dark ? "bg-[#18181b]" : "bg-[#F5F5F7]"}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
@@ -132,10 +135,10 @@ export default function About() {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#A8D5C2] to-[#A8C8E8] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                 <card.icon size={18} className="text-white" strokeWidth={2} />
               </div>
-              <h3 className="text-sm font-semibold text-[#1D1D1F] mb-1.5 leading-snug">
+              <h3 className={`text-sm font-semibold mb-1.5 leading-snug ${dark ? "text-white" : "text-[#1D1D1F]"}`}>
                 {card.title}
               </h3>
-              <p className="text-sm text-[#8E8E93] leading-relaxed">{card.desc}</p>
+              <p className={`text-sm leading-relaxed ${dark ? "text-[#71717a]" : "text-[#8E8E93]"}`}>{card.desc}</p>
             </motion.div>
           ))}
         </div>

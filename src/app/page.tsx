@@ -1,4 +1,5 @@
 import { LanguageProvider } from "@/context/LanguageContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -11,18 +12,20 @@ import ChatWidget from "@/components/ChatWidget";
 
 export default function Home() {
   return (
-    <LanguageProvider>
-      <Navbar />
-      <main id="main-content">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Services />
-        <Contact />
-      </main>
-      <Footer />
-      <ChatWidget />
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <Navbar />
+        <main id="main-content">
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Services />
+          <Contact />
+        </main>
+        <Footer />
+        <ChatWidget />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }

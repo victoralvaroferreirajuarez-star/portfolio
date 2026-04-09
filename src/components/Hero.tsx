@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 
 function GitHubIcon({ size = 17 }: { size?: number }) {
   return (
@@ -47,18 +48,24 @@ const fadeUp = (delay = 0) => ({
 
 export default function Hero() {
   const { lang } = useLanguage();
+  const { theme } = useTheme();
   const t = CONTENT[lang];
+  const dark = theme === "dark";
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FAFAFA]"
+      className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-300 ${
+        dark ? "bg-[#09090b]" : "bg-[#FAFAFA]"
+      }`}
     >
       {/* Gradient blobs */}
       <motion.div
         className="absolute top-[-8%] right-[-4%] w-[520px] h-[520px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle at center, rgba(168,213,194,0.45), transparent 68%)",
+          background: dark
+            ? "radial-gradient(circle at center, rgba(107,191,158,0.15), transparent 68%)"
+            : "radial-gradient(circle at center, rgba(168,213,194,0.45), transparent 68%)",
         }}
         animate={{ x: [0, 25, 0], y: [0, -18, 0], scale: [1, 1.04, 1] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
@@ -66,7 +73,9 @@ export default function Hero() {
       <motion.div
         className="absolute bottom-[-6%] left-[-4%] w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle at center, rgba(168,200,232,0.38), transparent 68%)",
+          background: dark
+            ? "radial-gradient(circle at center, rgba(91,168,212,0.12), transparent 68%)"
+            : "radial-gradient(circle at center, rgba(168,200,232,0.38), transparent 68%)",
         }}
         animate={{ x: [0, -18, 0], y: [0, 22, 0], scale: [1, 1.06, 1] }}
         transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
@@ -74,7 +83,9 @@ export default function Hero() {
       <motion.div
         className="absolute top-[42%] left-[28%] w-[320px] h-[320px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle at center, rgba(184,224,208,0.2), transparent 68%)",
+          background: dark
+            ? "radial-gradient(circle at center, rgba(107,191,158,0.08), transparent 68%)"
+            : "radial-gradient(circle at center, rgba(184,224,208,0.2), transparent 68%)",
         }}
         animate={{ x: [0, 12, 0], y: [0, -14, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
@@ -83,14 +94,18 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <motion.p
-          className="text-xs font-semibold text-[#6E6E73] tracking-[0.2em] uppercase mb-5"
+          className={`text-xs font-semibold tracking-[0.2em] uppercase mb-5 ${
+            dark ? "text-[#a1a1aa]" : "text-[#6E6E73]"
+          }`}
           {...fadeUp(0.2)}
         >
           {t.greeting}
         </motion.p>
 
         <motion.h1
-          className="text-[clamp(3rem,10vw,6.5rem)] font-bold tracking-[-0.03em] text-[#1D1D1F] leading-[1.02] mb-4"
+          className={`text-[clamp(3rem,10vw,6.5rem)] font-bold tracking-[-0.03em] leading-[1.02] mb-4 ${
+            dark ? "text-white" : "text-[#1D1D1F]"
+          }`}
           {...fadeUp(0.35)}
         >
           Alvaro Ferreira
@@ -104,14 +119,18 @@ export default function Hero() {
         </motion.p>
 
         <motion.p
-          className="text-lg md:text-xl text-[#6E6E73] font-light mb-2"
+          className={`text-lg md:text-xl font-light mb-2 ${
+            dark ? "text-[#a1a1aa]" : "text-[#6E6E73]"
+          }`}
           {...fadeUp(0.6)}
         >
           {t.role}
         </motion.p>
 
         <motion.p
-          className="text-sm text-[#6E6E73] mb-10 max-w-sm mx-auto leading-relaxed"
+          className={`text-sm mb-10 max-w-sm mx-auto leading-relaxed ${
+            dark ? "text-[#71717a]" : "text-[#6E6E73]"
+          }`}
           {...fadeUp(0.7)}
         >
           {t.tagline}
@@ -124,13 +143,21 @@ export default function Hero() {
         >
           <a
             href="#projects"
-            className="px-7 py-3 bg-[#1D1D1F] text-white text-sm font-medium rounded-full hover:bg-[#3a3a3d] active:scale-95 transition-all duration-300 hover:shadow-lg hover:shadow-black/10"
+            className={`px-7 py-3 text-sm font-medium rounded-full active:scale-95 transition-all duration-300 hover:shadow-lg ${
+              dark
+                ? "bg-white text-[#09090b] hover:bg-white/90 hover:shadow-white/10"
+                : "bg-[#1D1D1F] text-white hover:bg-[#3a3a3d] hover:shadow-black/10"
+            }`}
           >
             {t.cta1}
           </a>
           <a
             href="#contact"
-            className="px-7 py-3 border border-black/15 text-[#1D1D1F] text-sm font-medium rounded-full hover:border-black/30 hover:bg-black/[0.04] active:scale-95 transition-all duration-300"
+            className={`px-7 py-3 border text-sm font-medium rounded-full active:scale-95 transition-all duration-300 ${
+              dark
+                ? "border-white/15 text-white hover:border-white/30 hover:bg-white/[0.04]"
+                : "border-black/15 text-[#1D1D1F] hover:border-black/30 hover:bg-black/[0.04]"
+            }`}
           >
             {t.cta2}
           </a>
@@ -138,30 +165,33 @@ export default function Hero() {
 
         {/* Social */}
         <motion.div className="flex gap-3 justify-center" {...fadeUp(0.95)}>
-          <a
-            href="https://github.com/victoralvaroferreirajuarez-star"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full border border-black/10 text-[#6E6E73] hover:text-[#1D1D1F] hover:border-black/20 hover:bg-black/[0.04] transition-all duration-200 hover:scale-110 active:scale-95"
-            aria-label="GitHub"
-          >
-            <GitHubIcon size={17} />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/victor-alvaro-ferreira-juarez-321970322/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full border border-black/10 text-[#6E6E73] hover:text-[#1D1D1F] hover:border-black/20 hover:bg-black/[0.04] transition-all duration-200 hover:scale-110 active:scale-95"
-            aria-label="LinkedIn"
-          >
-            <LinkedInIcon size={17} />
-          </a>
+          {[
+            { href: "https://github.com/victoralvaroferreirajuarez-star", Icon: GitHubIcon, label: "GitHub" },
+            { href: "https://www.linkedin.com/in/victor-alvaro-ferreira-juarez-321970322/", Icon: LinkedInIcon, label: "LinkedIn" },
+          ].map(({ href, Icon, label }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-3 rounded-full border transition-all duration-200 hover:scale-110 active:scale-95 ${
+                dark
+                  ? "border-white/10 text-[#a1a1aa] hover:text-white hover:border-white/20 hover:bg-white/[0.04]"
+                  : "border-black/10 text-[#6E6E73] hover:text-[#1D1D1F] hover:border-black/20 hover:bg-black/[0.04]"
+              }`}
+              aria-label={label}
+            >
+              <Icon size={17} />
+            </a>
+          ))}
         </motion.div>
       </div>
 
       {/* Scroll cue */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#AEAEB2]"
+        className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 ${
+          dark ? "text-[#52525b]" : "text-[#AEAEB2]"
+        }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8, duration: 0.8 }}

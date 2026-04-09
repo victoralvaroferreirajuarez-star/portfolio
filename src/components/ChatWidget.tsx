@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 
 type Message = {
   id: string;
@@ -39,6 +40,8 @@ const playNotificationSound = () => {
 };
 
 export default function ChatWidget() {
+  const { theme } = useTheme();
+  const dark = theme === "dark";
   const [open, setOpen] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -158,7 +161,7 @@ export default function ChatWidget() {
               duration: 0.22,
               ease: [0.6, 0, 0.05, 1] as [number, number, number, number],
             }}
-            className="flex flex-col bg-[#0d0d0d] border border-white/10 shadow-2xl w-[320px]"
+            className={`flex flex-col shadow-2xl w-[320px] border ${dark ? "bg-[#0d0d0d] border-white/10" : "bg-white border-black/10"}`}
             style={{ borderRadius: 16, height: 460, overflow: "hidden" }}
           >
             {/* Header */}
@@ -188,7 +191,7 @@ export default function ChatWidget() {
             <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-2.5 min-h-0">
               {/* Static welcome bubble */}
               <div
-                className="bg-white/10 text-white text-sm px-3.5 py-2.5 self-start max-w-[80%]"
+                className={`text-sm px-3.5 py-2.5 self-start max-w-[80%] ${dark ? "bg-white/10 text-white" : "bg-[#F5F5F7] text-[#1D1D1F]"}`}
                 style={{ borderRadius: 12 }}
               >
                 ¡Hola! Soy Alvaro 👋 ¿En qué puedo ayudarte?
@@ -210,7 +213,9 @@ export default function ChatWidget() {
                       className={`max-w-[78%] px-3.5 py-2 text-sm leading-relaxed ${
                         msg.sender === "visitor"
                           ? "text-[#1D1D1F]"
-                          : "bg-white/10 text-white"
+                          : dark
+                            ? "bg-white/10 text-white"
+                            : "bg-[#F5F5F7] text-[#1D1D1F]"
                       }`}
                       style={{
                         borderRadius: 12,
@@ -229,7 +234,7 @@ export default function ChatWidget() {
             </div>
 
             {/* Input */}
-            <div className="px-3 py-3 border-t border-white/10 flex items-center gap-2 flex-shrink-0">
+            <div className={`px-3 py-3 border-t flex items-center gap-2 flex-shrink-0 ${dark ? "border-white/10" : "border-black/10"}`}>
               <input
                 type="text"
                 value={input}
@@ -242,7 +247,11 @@ export default function ChatWidget() {
                 }}
                 placeholder="Escribe un mensaje..."
                 disabled={initializing || !sessionId}
-                className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-white placeholder-[#6E6E73] text-sm focus:outline-none focus:border-[#6BBF9E]/40 transition-colors disabled:opacity-50"
+                className={`flex-1 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-[#6BBF9E]/40 transition-colors disabled:opacity-50 ${
+                  dark
+                    ? "bg-white/5 border border-white/10 text-white placeholder-[#6E6E73]"
+                    : "bg-[#F5F5F7] border border-black/10 text-[#1D1D1F] placeholder-[#8E8E93]"
+                }`}
               />
               <button
                 onClick={sendMessage}

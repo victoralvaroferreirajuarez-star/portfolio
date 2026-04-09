@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 
 const SKILLS = [
   { name: "HTML & CSS",        level: 45, gradient: "from-[#FF8C6B] to-[#FF6B6B]" },
@@ -31,10 +32,12 @@ const CONTENT = {
 
 export default function Skills() {
   const { lang } = useLanguage();
+  const { theme } = useTheme();
   const t = CONTENT[lang];
+  const dark = theme === "dark";
 
   return (
-    <section id="skills" className="py-32 bg-[#FAFAFA]">
+    <section id="skills" className={`py-32 transition-colors duration-300 ${dark ? "bg-[#0a0a0c]" : "bg-[#FAFAFA]"}`}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -47,10 +50,10 @@ export default function Skills() {
           <p className="text-xs font-semibold text-[#5BA8D4] tracking-[0.18em] uppercase mb-3">
             {t.label}
           </p>
-          <h2 className="text-[clamp(2rem,5vw,3.2rem)] font-bold text-[#1D1D1F] leading-[1.1] tracking-tight mb-4 whitespace-pre-line">
+          <h2 className={`text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-tight mb-4 whitespace-pre-line ${dark ? "text-white" : "text-[#1D1D1F]"}`}>
             {t.title}
           </h2>
-          <p className="text-[#8E8E93] max-w-lg font-light leading-relaxed">{t.subtitle}</p>
+          <p className={`max-w-lg font-light leading-relaxed ${dark ? "text-[#71717a]" : "text-[#8E8E93]"}`}>{t.subtitle}</p>
         </motion.div>
 
         {/* Skill bars */}
@@ -58,18 +61,18 @@ export default function Skills() {
           {SKILLS.map((skill, i) => (
             <motion.div
               key={skill.name}
-              className="p-6 bg-white rounded-2xl hover:shadow-md transition-shadow duration-300"
+              className={`p-6 rounded-2xl hover:shadow-md transition-shadow duration-300 ${dark ? "bg-[#18181b]" : "bg-white"}`}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.55, delay: i * 0.08, ease: [0.6, 0, 0.05, 1] }}
-              whileHover={{ y: -4, boxShadow: "0 8px 30px rgba(0,0,0,0.08)", transition: { duration: 0.25 } }}
+              whileHover={{ y: -4, boxShadow: dark ? "0 8px 30px rgba(0,0,0,0.3)" : "0 8px 30px rgba(0,0,0,0.08)", transition: { duration: 0.25 } }}
             >
               <div className="flex justify-between items-center mb-3">
-                <span className="text-sm font-semibold text-[#1D1D1F]">{skill.name}</span>
-                <span className="text-xs font-medium text-[#AEAEB2]">{skill.level}%</span>
+                <span className={`text-sm font-semibold ${dark ? "text-white" : "text-[#1D1D1F]"}`}>{skill.name}</span>
+                <span className={`text-xs font-medium ${dark ? "text-[#52525b]" : "text-[#AEAEB2]"}`}>{skill.level}%</span>
               </div>
-              <div className="h-[6px] bg-[#F5F5F7] rounded-full overflow-hidden">
+              <div className={`h-[6px] rounded-full overflow-hidden ${dark ? "bg-[#27272a]" : "bg-[#F5F5F7]"}`}>
                 <motion.div
                   className={`h-full rounded-full bg-gradient-to-r ${skill.gradient}`}
                   initial={{ width: 0 }}

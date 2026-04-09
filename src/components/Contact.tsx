@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 
 function GitHubIcon({ size = 17 }: { size?: number }) {
   return (
@@ -56,10 +57,12 @@ const CONTENT = {
 
 export default function Contact() {
   const { lang } = useLanguage();
+  const { theme } = useTheme();
   const t = CONTENT[lang];
+  const dark = theme === "dark";
 
   return (
-    <section id="contact" className="py-32 bg-[#111111] overflow-hidden relative" aria-label="Contact">
+    <section id="contact" className={`py-32 overflow-hidden relative transition-colors duration-300 ${dark ? "bg-[#09090b]" : "bg-[#111111]"}`} aria-label="Contact">
       <div
         className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none opacity-[0.08]"
         style={{ background: "radial-gradient(circle, #A8D5C2, transparent 65%)" }}

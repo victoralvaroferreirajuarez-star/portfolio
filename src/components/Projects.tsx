@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Clock, Sparkles } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 
 const CONTENT = {
   es: {
@@ -71,10 +72,12 @@ const CONTENT = {
 
 export default function Projects() {
   const { lang } = useLanguage();
+  const { theme } = useTheme();
   const t = CONTENT[lang];
+  const dark = theme === "dark";
 
   return (
-    <section id="projects" className="py-32 bg-white">
+    <section id="projects" className={`py-32 transition-colors duration-300 ${dark ? "bg-[#09090b]" : "bg-white"}`}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -87,10 +90,10 @@ export default function Projects() {
           <p className="text-xs font-semibold text-[#6BBF9E] tracking-[0.18em] uppercase mb-3">
             {t.label}
           </p>
-          <h2 className="text-[clamp(2rem,5vw,3.2rem)] font-bold text-[#1D1D1F] leading-[1.1] tracking-tight mb-4 whitespace-pre-line">
+          <h2 className={`text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-tight mb-4 whitespace-pre-line ${dark ? "text-white" : "text-[#1D1D1F]"}`}>
             {t.title}
           </h2>
-          <p className="text-[#8E8E93] max-w-lg font-light leading-relaxed">{t.subtitle}</p>
+          <p className={`max-w-lg font-light leading-relaxed ${dark ? "text-[#71717a]" : "text-[#8E8E93]"}`}>{t.subtitle}</p>
         </motion.div>
 
         {/* Cards */}
@@ -100,8 +103,12 @@ export default function Projects() {
               key={i}
               className={`relative flex flex-col p-7 rounded-3xl border transition-all duration-300 group ${
                 project.status === "live"
-                  ? "border-black/10 bg-[#FAFAFA] hover:border-[#A8D5C2]/70 hover:shadow-xl hover:shadow-black/5"
-                  : "border-black/[0.06] bg-[#F9F9F9]"
+                  ? dark
+                    ? "border-white/10 bg-[#18181b] hover:border-[#6BBF9E]/40 hover:shadow-xl hover:shadow-black/20"
+                    : "border-black/10 bg-[#FAFAFA] hover:border-[#A8D5C2]/70 hover:shadow-xl hover:shadow-black/5"
+                  : dark
+                    ? "border-white/[0.06] bg-[#131316]"
+                    : "border-black/[0.06] bg-[#F9F9F9]"
               }`}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -114,8 +121,12 @@ export default function Projects() {
                 <span
                   className={`flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full ${
                     project.status === "live"
-                      ? "bg-[#A8D5C2]/25 text-[#3D9B6E]"
-                      : "bg-black/[0.05] text-[#AEAEB2]"
+                      ? dark
+                        ? "bg-[#6BBF9E]/15 text-[#6BBF9E]"
+                        : "bg-[#A8D5C2]/25 text-[#3D9B6E]"
+                      : dark
+                        ? "bg-white/[0.06] text-[#52525b]"
+                        : "bg-black/[0.05] text-[#AEAEB2]"
                   }`}
                 >
                   {project.status === "live" ? (
@@ -134,7 +145,9 @@ export default function Projects() {
                 {project.href && (
                   <a
                     href={project.href}
-                    className="p-2 rounded-full bg-[#1D1D1F] text-white opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300 hover:scale-110 active:scale-95"
+                    className={`p-2 rounded-full opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300 hover:scale-110 active:scale-95 ${
+                      dark ? "bg-white text-[#09090b]" : "bg-[#1D1D1F] text-white"
+                    }`}
                     aria-label="Ver proyecto"
                   >
                     <ArrowUpRight size={14} />
@@ -142,8 +155,8 @@ export default function Projects() {
                 )}
               </div>
 
-              <h3 className="text-base font-bold text-[#1D1D1F] mb-2.5">{project.title}</h3>
-              <p className="text-sm text-[#8E8E93] leading-relaxed font-light flex-1 mb-5">
+              <h3 className={`text-base font-bold mb-2.5 ${dark ? "text-white" : "text-[#1D1D1F]"}`}>{project.title}</h3>
+              <p className={`text-sm leading-relaxed font-light flex-1 mb-5 ${dark ? "text-[#71717a]" : "text-[#8E8E93]"}`}>
                 {project.desc}
               </p>
 
@@ -151,7 +164,11 @@ export default function Projects() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[11px] text-[#AEAEB2] px-2.5 py-1 bg-white rounded-full border border-black/[0.07]"
+                    className={`text-[11px] px-2.5 py-1 rounded-full border ${
+                      dark
+                        ? "text-[#52525b] bg-[#27272a] border-white/[0.06]"
+                        : "text-[#AEAEB2] bg-white border-black/[0.07]"
+                    }`}
                   >
                     {tag}
                   </span>

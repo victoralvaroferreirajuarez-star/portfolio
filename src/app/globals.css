@@ -16,6 +16,13 @@ body {
   color: #1D1D1F;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode */
+html.dark body {
+  background-color: #09090b;
+  color: #e4e4e7;
 }
 
 /* Focus rings for accessibility */
@@ -25,7 +32,7 @@ body {
   border-radius: 4px;
 }
 
-/* Skip to content (shown on Tab) */
+/* Skip to content */
 .skip-to-content {
   position: absolute;
   top: -100%;
@@ -60,13 +67,20 @@ body {
   background: #a1a1a6;
 }
 
+html.dark ::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
 /* Selection */
 ::selection {
   background: #A8D5C2;
   color: #1D1D1F;
 }
 
-/* Reduced motion preference */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

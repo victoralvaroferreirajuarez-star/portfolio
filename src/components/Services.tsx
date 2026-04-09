@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Workflow, Bot, Database, CheckCircle, Loader2, X } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 
 const CONTENT = {
   es: {
@@ -157,7 +158,9 @@ const fadeUp = {
 
 export default function Services() {
   const { lang } = useLanguage();
+  const { theme } = useTheme();
   const t = CONTENT[lang];
+  const dark = theme === "dark";
 
   const [form, setForm] = useState({ name: "", email: "", service: "", description: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -183,7 +186,7 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="py-32 bg-[#FAFAFA]">
+    <section id="services" className={`py-32 transition-colors duration-300 ${dark ? "bg-[#0a0a0c]" : "bg-[#FAFAFA]"}`}>
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Header */}
@@ -198,10 +201,10 @@ export default function Services() {
           <p className="text-xs font-semibold text-[#6BBF9E] tracking-[0.18em] uppercase mb-3">
             {t.label}
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1D1D1F] tracking-tight mb-4">
+          <h2 className={`text-4xl md:text-5xl font-bold tracking-tight mb-4 ${dark ? "text-white" : "text-[#1D1D1F]"}`}>
             {t.title}
           </h2>
-          <p className="text-[#6E6E73] text-lg max-w-xl">{t.subtitle}</p>
+          <p className={`text-lg max-w-xl ${dark ? "text-[#a1a1aa]" : "text-[#6E6E73]"}`}>{t.subtitle}</p>
         </motion.div>
 
         {/* Service Cards */}
@@ -217,18 +220,22 @@ export default function Services() {
                 variants={fadeUp}
                 viewport={{ once: true, margin: "-60px" }}
                 onClick={() => setModal(service)}
-                className="cursor-pointer bg-white rounded-2xl p-7 border border-black/[0.06] shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                className={`cursor-pointer rounded-2xl p-7 border shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col ${
+                  dark
+                    ? "bg-[#18181b] border-white/[0.06]"
+                    : "bg-white border-black/[0.06]"
+                }`}
               >
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-5`}>
                   <Icon size={22} style={{ color: service.accent }} />
                 </div>
-                <h3 className="text-lg font-semibold text-[#1D1D1F] mb-2">{service.name}</h3>
-                <p className="text-[#6E6E73] text-sm leading-relaxed flex-1">{service.description}</p>
+                <h3 className={`text-lg font-semibold mb-2 ${dark ? "text-white" : "text-[#1D1D1F]"}`}>{service.name}</h3>
+                <p className={`text-sm leading-relaxed flex-1 ${dark ? "text-[#71717a]" : "text-[#6E6E73]"}`}>{service.description}</p>
                 <div className="mt-5 flex items-center justify-between">
                   <span className="text-base font-bold bg-gradient-to-r from-[#6BBF9E] to-[#5BA8D4] bg-clip-text text-transparent">
                     {service.price}
                   </span>
-                  <span className="text-xs font-semibold text-[#6E6E73]">
+                  <span className={`text-xs font-semibold ${dark ? "text-[#52525b]" : "text-[#6E6E73]"}`}>
                     {lang === "es" ? "Ver más →" : "Learn more →"}
                   </span>
                 </div>
@@ -257,11 +264,11 @@ export default function Services() {
                   exit={{ opacity: 0, scale: 0.96, y: 16 }}
                   transition={{ duration: 0.25 }}
                   onClick={(e) => e.stopPropagation()}
-                  className="bg-white w-full max-w-lg shadow-2xl"
+                  className={`w-full max-w-lg shadow-2xl ${dark ? "bg-[#18181b]" : "bg-white"}`}
                   style={{ borderRadius: 0 }}
                 >
                   {/* Modal header */}
-                  <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-black/[0.06]">
+                  <div className={`flex items-center justify-between px-8 pt-8 pb-6 border-b ${dark ? "border-white/[0.06]" : "border-black/[0.06]"}`}>
                     <div className="flex items-center gap-4">
                       <div className={`w-10 h-10 bg-gradient-to-br ${modal.color} flex items-center justify-center`}>
                         <Icon size={18} style={{ color: modal.accent }} />
@@ -270,12 +277,12 @@ export default function Services() {
                         <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-0.5" style={{ color: modal.accent }}>
                           {lang === "es" ? "Servicio" : "Service"}
                         </p>
-                        <h3 className="text-xl font-bold text-[#1D1D1F]">{modal.name}</h3>
+                        <h3 className={`text-xl font-bold ${dark ? "text-white" : "text-[#1D1D1F]"}`}>{modal.name}</h3>
                       </div>
                     </div>
                     <button
                       onClick={() => setModal(null)}
-                      className="text-[#AEAEB2] hover:text-[#1D1D1F] transition-colors"
+                      className={`transition-colors ${dark ? "text-[#52525b] hover:text-white" : "text-[#AEAEB2] hover:text-[#1D1D1F]"}`}
                     >
                       <X size={20} />
                     </button>
@@ -283,13 +290,13 @@ export default function Services() {
 
                   {/* Modal body */}
                   <div className="px-8 py-6">
-                    <p className="text-[#6E6E73] text-sm leading-relaxed mb-6">{modal.description}</p>
-                    <p className="text-xs font-semibold text-[#AEAEB2] tracking-[0.15em] uppercase mb-3">
+                    <p className={`text-sm leading-relaxed mb-6 ${dark ? "text-[#a1a1aa]" : "text-[#6E6E73]"}`}>{modal.description}</p>
+                    <p className={`text-xs font-semibold tracking-[0.15em] uppercase mb-3 ${dark ? "text-[#52525b]" : "text-[#AEAEB2]"}`}>
                       {lang === "es" ? "Qué incluye" : "What's included"}
                     </p>
                     <ul className="flex flex-col gap-3 mb-8">
                       {modal.details.map((d, j) => (
-                        <li key={j} className="flex items-center gap-3 text-sm text-[#3a3a3c]">
+                        <li key={j} className={`flex items-center gap-3 text-sm ${dark ? "text-[#a1a1aa]" : "text-[#3a3a3c]"}`}>
                           <span className="w-1.5 h-1.5 flex-shrink-0" style={{ backgroundColor: modal.accent }} />
                           {d}
                         </li>
@@ -307,7 +314,7 @@ export default function Services() {
                             document.getElementById("service-form")?.scrollIntoView({ behavior: "smooth" });
                           }, 100);
                         }}
-                        className="text-sm font-semibold px-6 py-2.5 text-[#1D1D1F] hover:opacity-90 transition-opacity"
+                        className={`text-sm font-semibold px-6 py-2.5 hover:opacity-90 transition-opacity ${dark ? "text-[#09090b]" : "text-[#1D1D1F]"}`}
                         style={{ background: `linear-gradient(135deg, #A8D5C2, #A8C8E8)`, borderRadius: 0 }}
                       >
                         {lang === "es" ? "Solicitar →" : "Request →"}
