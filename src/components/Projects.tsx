@@ -21,11 +21,11 @@ const CONTENT = {
         href: "#hero",
       },
       {
-        title: "Proyecto #1",
-        desc: "Una aplicación web en la que estoy trabajando. Los detalles se revelarán pronto.",
-        tags: ["React", "Node.js", "PostgreSQL"],
-        status: "soon",
-        href: null,
+        title: "BananitaStore",
+        desc: "Marketplace de mascotas de Adopt Me (Roblox). Compra, vende y calcula el valor de tus pets con una interfaz moderna.",
+        tags: ["JavaScript", "Vite", "Supabase"],
+        status: "live",
+        href: "https://www.bananitastore.shop",
       },
       {
         title: "Proyecto #2",
@@ -52,11 +52,11 @@ const CONTENT = {
         href: "#hero",
       },
       {
-        title: "Project #1",
-        desc: "A web application I'm currently working on. Details coming soon.",
-        tags: ["React", "Node.js", "PostgreSQL"],
-        status: "soon",
-        href: null,
+        title: "BananitaStore",
+        desc: "Adopt Me (Roblox) pet marketplace. Buy, sell and calculate your pets' value with a modern interface.",
+        tags: ["JavaScript", "Vite", "Supabase"],
+        status: "live",
+        href: "https://www.bananitastore.shop",
       },
       {
         title: "Project #2",
